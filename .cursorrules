@@ -1,0 +1,63 @@
+# Instructions
+
+During your interaction with the user, if you find anything reusable in this project (e.g. version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `Lessons` section in the `.cursorrules` file so you will not make the same mistake again. 
+
+You should also use the `.cursorrules` file as a Scratchpad to organize your thoughts. Especially when you receive a new task, you should first review the content of the Scratchpad, clear old different task if necessary, first explain the task, and plan the steps you need to take to complete the task. You can use todo markers to indicate the progress, e.g.
+[X] Task 1
+[ ] Task 2
+
+Also update the progress of the task in the Scratchpad when you finish a subtask.
+Especially when you finished a milestone, it will help to improve your depth of task accomplishment to use the Scratchpad to reflect and plan.
+The goal is to help you maintain a big picture as well as the progress of the task. Always refer to the Scratchpad when you plan the next step.
+
+Note: Modifying the code should not affect existing functions
+
+# Scratchpad
+
+## 当前任务：零样本分类模型微调
+基于 facebook/bart-large-mnli 模型，使用 SFT (Supervised Fine-Tuning) 方法对 FileExtractorData.xlsx 数据集进行微调，实现段落文本的零样本分类任务。
+
+### 任务分解：
+[ ] 1. 环境准备
+    - 创建并配置 requirements.txt
+    - 安装必要的依赖包
+
+[ ] 2. 数据处理
+    - 读取并解析 FileExtractorData.xlsx
+    - 数据预处理和清洗
+    - 划分训练集和验证集
+
+[ ] 3. 模型训练
+    - 加载预训练模型 facebook/bart-large-mnli
+    - 实现 SFT 训练逻辑
+    - 配置训练参数和优化器
+
+[ ] 4. 模型评估
+    - 实现评估指标
+    - 在验证集上评估模型性能
+
+[ ] 5. 模型保存和导出
+    - 保存训练好的模型
+    - 创建模型使用示例
+
+### Lessons
+- 在 transformers 的 TrainingArguments 中，评估策略参数应该使用 `eval_strategy` 而不是 `evaluation_strategy`
+- 训练参数配置：
+  ```python
+  training_args = TrainingArguments(
+      output_dir="./models/checkpoints",
+      learning_rate=2e-5,
+      per_device_train_batch_size=8,
+      per_device_eval_batch_size=8,
+      num_train_epochs=3,
+      weight_decay=0.01,
+      logging_dir="./logs",
+      save_strategy="epoch",  # 每个epoch保存一次
+      eval_strategy="epoch",  # 每个epoch评估一次
+      load_best_model_at_end=True,  # 加载最佳模型
+      metric_for_best_model="accuracy",  # 使用accuracy作为评估指标
+      greater_is_better=True,  # accuracy越大越好
+      logging_steps=100,  # 每100步记录一次日志
+      report_to="none"  # 不使用任何报告器
+  )
+  ```
