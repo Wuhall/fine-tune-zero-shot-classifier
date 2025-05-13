@@ -81,6 +81,3 @@ curl -X POST "http://localhost:5000/predict" -H "Content-Type: application/json"
 ├── requirements.txt         # 依赖包列表
 └── README.md                # 项目说明
 ```
-
-## 联系方式
-如有问题或建议，欢迎提issue或联系作者。
