@@ -1,6 +1,7 @@
 *.log
 __MACOSX
 FileExtractorData.xlsx
+FileExtractorData3.xlsx
 
 models/checkpoints
 models/final_model
