@@ -55,7 +55,7 @@ def preprocess_data(df):
 def prepare_model_and_tokenizer():
     """准备模型和分词器"""
     # model_name = "facebook/bart-large-mnli"
-    model_name = '/home/gpuser/workspace/sft/fine-tune-zero-shot-classifier/baseline/models--facebook--bart-large-mnli/snapshots/d7645e127eaf1aefc7862fd59a17a5aa8558b8ce'
+    model_name = '/your/path/snapshots/d7645e127eaf1aefc7862fd59a17a5aa8558b8ce'
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     config = AutoConfig.from_pretrained(model_name, num_labels=4, problem_type="single_label_classification")
     model = AutoModelForSequenceClassification.from_pretrained(
