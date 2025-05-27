@@ -30,7 +30,7 @@ dataset_dict = DatasetDict({
 
 # 创建数据集仓库
 api = HfApi()
-repo_id = "yourname/yourdatasetname"
+repo_id = os.getenv("DATASET_NAME")
 try:
     api.create_repo(repo_id=repo_id, repo_type="dataset", private=True, token=hf_token)
 except Exception as e:
